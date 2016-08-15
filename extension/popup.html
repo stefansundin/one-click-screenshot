@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/popup.js"></script>
+</head>
+<body>
+  <h2>
+    <span>One-click Screenshot</span>
+    <small id="extension_version" class="pull-right">Button Text</small>
+  </h2>
+
+  <div class="input-group">
+    <div class="input-group-addon"><label for="filename">Filename</label></div>
+    <input class="form-control" type="search" id="filename" placeholder="website.png" pattern='^[^\t:*?"<>|]*$' spellcheck="false">
+  </div>
+
+  <div class="input-group btns">
+    <button class="btn btn-primary" id="capture">Take screenshot</button>
+    <a class="btn btn-default" href="https://stefansundin.github.io/one-click-screenshot/" target="_blank">Help</a>
+    <a class="btn btn-default" href="https://stefansundin.github.io/one-click-screenshot/" target="_blank">Donate</a>
+  </div>
+</body>
+</html>

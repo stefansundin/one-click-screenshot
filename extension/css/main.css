@@ -1,0 +1,27 @@
+body {
+  width: 500px;
+  padding: 10px;
+}
+
+h2 {
+  margin-top: 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.125em;
+}
+
+*[monospace] {
+  font-family: monospace;
+}
+input[pattern]:invalid {
+  color: red;
+}
+
+.input-group-addon label {
+  margin: 0;
+}
+.input-group.btns {
+  margin-top: 0.5em;
+}
+.input-group.btns > .btn {
+  margin-right: 1em;
+}
