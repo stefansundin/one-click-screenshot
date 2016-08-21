@@ -14,9 +14,19 @@ document.addEventListener "DOMContentLoaded", ->
     if message.action == "goodbye"
       window.close()
 
+  chrome.storage.sync.get {
+    saveAs: false
+  }, (items) ->
+    $("#saveAs").checked = items.saveAs
+
+  $("#saveAs").addEventListener "click", ->
+    chrome.storage.sync.set {
+      saveAs: this.checked
+    }
+
   chrome.tabs.query { active: true, lastFocusedWindow: true }, (tabs) ->
     tab = tabs[0]
-    title = tab.title.replace(/[:*?"<>|\r\n]/g, "").replace(/[\t /]+/g, " ").trim();
+    title = tab.title.replace(/[:*?"<>|\r\n]/g, "").replace(/[\t /]+/g, " ").trim()
     $("#filename").value = title + ".png"
     chrome.runtime.sendMessage {
       action: "options"

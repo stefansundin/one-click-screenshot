@@ -1,0 +1,10 @@
+a {
+  text-decoration: none;
+}
+label {
+  display: block;
+  margin: 1em 0;
+}
+ul {
+  padding: 0 17px;
+}

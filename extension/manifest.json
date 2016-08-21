@@ -20,10 +20,15 @@
     "default_title": "One-click Screenshot",
     "default_popup": "popup.html"
   },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
   "permissions": [
     "activeTab",
+    "<all_urls>",
     "downloads",
-    "<all_urls>"
+    "storage"
   ],
   "web_accessible_resources": [
     "js/content_script.js"
