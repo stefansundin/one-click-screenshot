@@ -8,6 +8,16 @@ $ = ->
   else
     elements
 
+document.addEventListener "keydown", (e) ->
+  # abort and clear autostart on escape key
+  if e.keyCode == 27
+    chrome.storage.sync.set {
+      autostart: false
+    }
+    chrome.runtime.sendMessage {
+      action: "abort"
+    }
+
 document.addEventListener "DOMContentLoaded", ->
   $("#extension_version").textContent = version
 
