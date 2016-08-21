@@ -19,9 +19,6 @@ input[pattern]:invalid {
 .input-group-addon label {
   margin: 0;
 }
-.input-group.btns {
-  margin-top: 0.5em;
-}
 .input-group.btns > .btn {
   margin-right: 1em;
 }

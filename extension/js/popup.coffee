@@ -19,14 +19,15 @@ document.addEventListener "DOMContentLoaded", ->
     title = tab.title.replace(/[:*?"<>|\r\n]/g, "").replace(/[\t /]+/g, " ").trim();
     $("#filename").value = title + ".png"
     chrome.runtime.sendMessage {
-      action: "windowId"
+      action: "options"
       windowId: tab.windowId
     }
 
   $("#capture").addEventListener "click", ->
     chrome.runtime.sendMessage {
-      action: "filename"
+      action: "options"
       filename: $("#filename").value
+      saveAs: $("#saveAs").checked
     }
     chrome.tabs.insertCSS {
       file: "css/inject.css"
