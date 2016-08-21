@@ -1,5 +1,8 @@
 (->
-  initialPosition = [document.scrollingElement.scrollLeft, document.scrollingElement.scrollTop]
+  initialPosition = {
+    x: document.scrollingElement.scrollLeft
+    y: document.scrollingElement.scrollTop
+  }
 
   measureScrollbar = ->
     if document.body.scrollHeight < window.innerHeight
@@ -14,9 +17,9 @@
 
   capture_callback = (aborted) ->
     if aborted
-      window.scrollTo initialPosition[0], initialPosition[1]
+      window.scrollTo initialPosition.x, initialPosition.y
       return
-    setTimeout(capture_next, 100)
+    setTimeout capture_next, 50
 
   capture_next = ->
     x = document.scrollingElement.scrollLeft
@@ -30,20 +33,18 @@
       if y > scrollHeight-height
         y = scrollHeight-height
       window.scrollTo x, y
-      setTimeout ->
-        chrome.runtime.sendMessage {
-          action: "capture"
-          x: x
-          y: y
-        }, capture_callback
-      , 100
+      chrome.runtime.sendMessage {
+        action: "capture"
+        x: x
+        y: y
+      }, capture_callback
     else
-      window.scrollTo initialPosition[0], initialPosition[1]
       setTimeout ->
+        window.scrollTo initialPosition.x, initialPosition.y
         chrome.runtime.sendMessage {
           action: "goodbye"
         }
-      , 100
+      , 50
 
   chrome.runtime.sendMessage {
     action: "start"
@@ -57,7 +58,7 @@
       x: 0
       y: 0
     }, capture_callback
-  , 100
+  , 50
 
   return "injected"
 )()
