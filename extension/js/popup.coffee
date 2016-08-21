@@ -15,8 +15,13 @@ document.addEventListener "DOMContentLoaded", ->
       window.close()
 
   chrome.tabs.query { active: true, lastFocusedWindow: true }, (tabs) ->
-    title = tabs[0].title.replace(/[:*?"<>|\r\n]/g, "").replace(/[\t /]+/g, " ").trim();
+    tab = tabs[0]
+    title = tab.title.replace(/[:*?"<>|\r\n]/g, "").replace(/[\t /]+/g, " ").trim();
     $("#filename").value = title + ".png"
+    chrome.runtime.sendMessage {
+      action: "windowId"
+      windowId: tab.windowId
+    }
 
   $("#capture").addEventListener "click", ->
     chrome.runtime.sendMessage {
