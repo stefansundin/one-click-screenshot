@@ -23,6 +23,9 @@ document.addEventListener "DOMContentLoaded", ->
       action: "filename"
       filename: $("#filename").value
     }
+    chrome.tabs.insertCSS {
+      file: "css/inject.css"
+    }
     chrome.tabs.executeScript {
       file: "js/content_script.js"
     } , (ret) ->

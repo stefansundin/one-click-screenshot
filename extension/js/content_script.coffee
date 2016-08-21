@@ -1,6 +1,17 @@
 (->
   initialPosition = [document.scrollingElement.scrollLeft, document.scrollingElement.scrollTop]
 
+  measureScrollbar = ->
+    if document.body.scrollHeight < window.innerHeight
+      # No scrollbar
+      return 0
+    scrollDiv = document.createElement("div")
+    scrollDiv.className = "ocs-scrollbar-measure"
+    document.body.appendChild(scrollDiv)
+    scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
+    document.body.removeChild(scrollDiv)
+    return scrollbarWidth
+
   callback = ->
     x = document.scrollingElement.scrollLeft
     y = document.scrollingElement.scrollTop
@@ -30,7 +41,7 @@
 
   chrome.runtime.sendMessage {
     action: "start"
-    width: window.innerWidth
+    width: window.innerWidth-measureScrollbar()
     height: document.scrollingElement.scrollHeight
   }
   window.scrollTo 0, 0
