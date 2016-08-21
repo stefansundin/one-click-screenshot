@@ -5,6 +5,7 @@ options = {
   saveAs: false
   windowId: null
 }
+aborted = false
 
 chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
   # console.log "message", message, sender
@@ -15,6 +16,7 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
   else if message.action == "start"
     canvas.width = message.width
     canvas.height = message.height
+    aborted = false
   else if message.action == "capture"
     chrome.tabs.captureVisibleTab options.windowId, {
       format: "png"
@@ -27,7 +29,7 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
       img.onload = ->
         context.drawImage(this, message.x, message.y)
       img.src = data
-    sendResponse()
+    sendResponse(aborted)
   else if message.action == "goodbye"
     opts = {
       url: context.canvas.toDataURL()
@@ -38,3 +40,5 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
     else
       opts.saveAs = true
     chrome.downloads.download opts
+  else if message.action == "abort"
+    aborted = true

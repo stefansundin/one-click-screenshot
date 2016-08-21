@@ -12,7 +12,13 @@
     document.body.removeChild(scrollDiv)
     return scrollbarWidth
 
-  callback = ->
+  capture_callback = (aborted) ->
+    if aborted
+      window.scrollTo initialPosition[0], initialPosition[1]
+      return
+    setTimeout(capture_next, 100)
+
+  capture_next = ->
     x = document.scrollingElement.scrollLeft
     y = document.scrollingElement.scrollTop
     scrollHeight = document.scrollingElement.scrollHeight
@@ -29,7 +35,7 @@
           action: "capture"
           x: x
           y: y
-        }, -> setTimeout(callback, 100)
+        }, capture_callback
       , 100
     else
       window.scrollTo initialPosition[0], initialPosition[1]
@@ -50,7 +56,7 @@
       action: "capture"
       x: 0
       y: 0
-    }, -> setTimeout(callback, 100)
+    }, capture_callback
   , 100
 
   return "injected"
