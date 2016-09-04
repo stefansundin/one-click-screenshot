@@ -39,6 +39,12 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
       opts.filename = options.filename
     else
       opts.saveAs = true
-    chrome.downloads.download opts
+
+    if navigator.userAgent.indexOf("Firefox/") != -1
+      # can't figure out how to save data uri with chrome.downloads in Firefox 48
+      opts.action = "download"
+      chrome.runtime.sendMessage opts
+    else
+      chrome.downloads.download opts
   else if message.action == "abort"
     aborted = true

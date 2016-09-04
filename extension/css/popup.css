@@ -22,3 +22,10 @@ input[pattern]:invalid {
 .input-group.btns > .btn {
   margin-right: 1em;
 }
+
+body.firefox .checkbox {
+  display: none;
+}
+body.firefox .input-group.btns {
+  margin-top: 0.5em;
+}

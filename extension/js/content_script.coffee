@@ -12,6 +12,9 @@
     scrollDiv.className = "ocs-scrollbar-measure"
     document.body.appendChild(scrollDiv)
     scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
+    if scrollbarWidth == 0
+      # Firefox seems to have problems with this, so in this case just guess that the scrollbar is 15 pixels wide
+      scrollbarWidth = 15
     document.body.removeChild(scrollDiv)
     return scrollbarWidth
 

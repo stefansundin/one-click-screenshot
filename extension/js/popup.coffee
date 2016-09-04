@@ -21,9 +21,22 @@ document.addEventListener "keydown", (e) ->
 document.addEventListener "DOMContentLoaded", ->
   $("#extension_version").textContent = version
 
-  chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
-    if message.action == "goodbye" && $("#autostart").checked == false
-      window.close()
+  if navigator.userAgent.indexOf("Firefox/") != -1
+    document.body.className += " firefox"
+    chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
+      if message.action == "download"
+        a = document.createElement("a")
+        a.href = message.url
+        if message.filename
+          a.download = message.filename
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+  else
+    # if we close the popup in Firefox, we will interrupt the download action above
+    chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
+      if message.action == "goodbye" && $("#autostart").checked == false
+        window.close()
 
   chrome.tabs.query { active: true, lastFocusedWindow: true }, (tabs) ->
     tab = tabs[0]
@@ -34,14 +47,16 @@ document.addEventListener "DOMContentLoaded", ->
       windowId: tab.windowId
     }
 
-  chrome.storage.sync.get {
-    saveAs: false
-    autostart: false
-  }, (items) ->
-    $("#saveAs").checked = items.saveAs
-    if items.autostart
-      $("#autostart").checked = true
-      $("#capture").click()
+  if chrome.storage.sync
+    # https://bugzilla.mozilla.org/show_bug.cgi?id=1220494
+    chrome.storage.sync.get {
+      saveAs: false
+      autostart: false
+    }, (items) ->
+      $("#saveAs").checked = items.saveAs
+      if items.autostart
+        $("#autostart").checked = true
+        $("#capture").click()
 
   $("#saveAs").addEventListener "click", ->
     chrome.storage.sync.set {
@@ -76,6 +91,7 @@ document.addEventListener "DOMContentLoaded", ->
     chrome.tabs.executeScript {
       file: "js/content_script.js"
     } , (ret) ->
+      console.log ret
       if ret[0] == "injected"
         capture_started = true
         $("#filename").disabled = true
