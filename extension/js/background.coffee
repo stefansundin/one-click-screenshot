@@ -10,9 +10,9 @@ aborted = false
 chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
   # console.log "message", message, sender
   if message.action == "options"
-    options.filename = message.filename if message.filename
-    options.saveAs = message.saveAs if message.saveAs
-    options.windowId = message.windowId if message.windowId
+    options.filename = message.filename if message.filename != undefined
+    options.saveAs = message.saveAs if message.saveAs != undefined
+    options.windowId = message.windowId if message.windowId != undefined
   else if message.action == "start"
     canvas.width = message.width
     canvas.height = message.height
