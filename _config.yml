@@ -1,0 +1,18 @@
+title: One-click Screenshot
+url: https://stefansundin.github.io
+baseurl: /one-click-screenshot
+description: Take screenshots of entire websites.
+author: Stefan Sundin
+extension_id: jcjhinpbjkmdphmhkikndcdlfpkgllfo
+extension_name: one-click-screenshot
+
+# posts
+permalink: /news/:year-:month-:day-:title.html
+
+# build
+gems:
+- jekyll-coffeescript
+- jekyll-github-metadata
+markdown: kramdown
+kramdown:
+  input: GFM

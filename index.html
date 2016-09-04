@@ -1,0 +1,74 @@
+---
+---
+<!DOCTYPE html>
+<html>
+{% include head.html %}
+<body class="pad">
+  <header>
+    <img src="img/icon128.png" width="128" height="128" alt="{{ site.title }} Icon" itemprop="image">
+    <h1 itemprop="name">{{ site.title }}</h1>
+    <h2 itemprop="description">{{ site.description }}</h2>
+  </header>
+
+  <div class="text-center btn-group-lg">
+    <a class="btn btn-default" href="https://chrome.google.com/webstore/detail/{{ site.extension_name }}/{{ site.extension_id }}" id="chrome-button"><span class="glyphicon glyphicon-download-alt"></span> Chrome</a>
+    <a class="btn btn-default" href="https://addons.mozilla.org/firefox/addon/{{ site.extension_name }}/" id="firefox-button"><span class="glyphicon glyphicon-download-alt"></span> Firefox</a>
+    <a class="btn btn-default" href="{{ site.github.repository_url }}"><span class="glyphicon glyphicon-new-window"></span> Source code</a>
+  </div>
+
+  <div class="text-center hidden" id="browser-warning">
+    <h3><strong>Note:</strong> This extension only works with <a href="https://www.google.com/chrome/">Chrome</a> and <a href="https://getfirefox.com/">Firefox</a>!</h3>
+  </div>
+
+  <div class="container">
+    <h2 id="intro">What is One-click Screenshot?</h2>
+
+    <p>This extension is very simple. With just a few clicks, you can take a screenshot of an entire website and save it to a png file. There is no bloat or any fancy post-processing. The extension is open source.</p>
+
+    <p>If you like this extension, please rate it on <a href="https://chrome.google.com/webstore/detail/{{ site.extension_name }}/{{ site.extension_id }}">the Chrome Web Store</a> or on <a href="https://addons.mozilla.org/firefox/addon/{{ site.extension_name }}/reviews/add">Firefox addons</a>. Thank you!</p>
+
+
+    <h2 id="donate">Donate</h2>
+
+    <p>Donate if you want me to work more on this extension!</p>
+
+    <form method="post" action="https://www.paypal.com/cgi-bin/webscr" track="donate" target="_blank">
+      <input type="hidden" name="cmd" value="_xclick">
+      <input type="hidden" name="business" value="KYMVEK692RF5Q">
+      <input type="hidden" name="item_number" value="One-click screenshot">
+      <input type="hidden" name="return" value="https://stefansundin.github.io/thx">
+      <input type="hidden" name="cbt" value="Learn why you just became awesome">
+      <div class="input-group col-sm-5">
+        <input class="form-control" type="text" name="amount" id="amount" value="$5.00" placeholder="Amount">
+        <span class="input-group-btn">
+          <input class="btn btn-success" type="submit" value="Donate with PayPal">
+        </span>
+      </div>
+    </form>
+
+    <p><small><a class="expander" expand="donation-options">Show other donation options: Bitcoin, Square Cash, ChangeTip.</a></small></p>
+    <div id="donation-options">
+      <p>Other donation options:</p>
+      <ul>
+        <li>Bitcoin: <tt>1EhDUbc5MjC6JavC6idKiTCxnqSxY2sbTX</tt> (<a target="_blank" href="img/btc-qr.png">QR code</a>)</li>
+        <li>Square Cash: <a target="_blank" href="https://cash.me/$StefanSundin">$StefanSundin</a></li>
+        <li>ChangeTip: <a target="_blank" href="https://www.changetip.com/tipme/stefansundin">stefansundin</a></li>
+      </ul>
+      <p>Contact me at <a target="_blank" fubar>stefaNStefansundinCom</a> if none of the above work.</p>
+    </div>
+
+
+    <h2 id="news">News <a target="_blank" href="feed.xml"><img src="img/feed.png" alt="RSS feed"></a></h2>
+
+    {% for post in site.posts %}
+    <p><strong>{{ post.date | date: "%Y-%m-%d" }} - {{ post.title }}</strong></p>
+    <div class="post-body">{{ post.content }}</div>
+    {% endfor %}
+  </div>
+
+  <script src="js/browser.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/fubar.js"></script>
+  <script src="js/expander.js"></script>
+</body>
+</html>
