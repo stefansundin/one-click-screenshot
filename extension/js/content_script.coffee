@@ -47,7 +47,7 @@
         chrome.runtime.sendMessage {
           action: "goodbye"
         }
-      , 50
+      , 100
 
   chrome.runtime.sendMessage {
     action: "start"
