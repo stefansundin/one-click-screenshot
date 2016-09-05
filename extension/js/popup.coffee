@@ -75,7 +75,7 @@ document.addEventListener "DOMContentLoaded", ->
       chrome.runtime.sendMessage {
         action: "abort"
       }
-      $("#capture").innerHTML = "Aborted"
+      $("#capture").innerText = "Aborted"
 
   $("#capture").addEventListener "click", ->
     if !/\.png$/i.test($("#filename").value)
@@ -96,4 +96,4 @@ document.addEventListener "DOMContentLoaded", ->
         capture_started = true
         $("#filename").disabled = true
         $("#capture").disabled = true
-        $("#capture").innerHTML = "Working... please hold"
+        $("#capture").innerText = "Working... please hold"
