@@ -32,7 +32,8 @@
     height = window.innerHeight
     # console.log(x, y, width,height, scrollHeight)
     if y+height < scrollHeight
-      y += height
+      # Subtract 20 pixels to avoid getting the horizontal scrollbar repeatedly
+      y += height-20
       if y > scrollHeight-height
         y = scrollHeight-height
       window.scrollTo x, y
