@@ -8,3 +8,6 @@ label {
 ul {
   padding: 0 17px;
 }
+#status {
+  visibility: hidden;
+}

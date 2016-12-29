@@ -29,3 +29,7 @@ body.firefox .checkbox {
 body.firefox .input-group.btns {
   margin-top: 0.5em;
 }
+
+#shortcut {
+  cursor: pointer;
+}

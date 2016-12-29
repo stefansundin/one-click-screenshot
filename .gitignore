@@ -2,12 +2,9 @@ Thumbs.db
 *.DS_Store
 *.swp
 
-*.js
 *.min.js
 *.min.css
 *.woff2
-/node_modules
-web-ext-artifacts
 /*.crx
 /*.xpi
 /*.zip
