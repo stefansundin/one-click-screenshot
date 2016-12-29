@@ -20,6 +20,9 @@ document.addEventListener("keydown", function(e) {
       action: "abort"
     });
   }
+  else if (e.keyCode == 13) {
+    $("#capture").click();
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function() {
