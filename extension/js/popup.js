@@ -13,9 +13,12 @@ function $() {
 
 document.addEventListener("keydown", function(e) {
   if (e.keyCode == 27) {
-    chrome.storage.sync.set({
-      autostart: false
-    });
+    // This does not work in Firefox, the popup is just dismissed
+    if (chrome.storage.sync) {
+      chrome.storage.sync.set({
+        autostart: false
+      });
+    }
     chrome.runtime.sendMessage({
       action: "abort"
     });
