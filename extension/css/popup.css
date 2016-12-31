@@ -23,13 +23,23 @@ input[pattern]:invalid {
   margin-right: 1em;
 }
 
+#shortcut {
+  cursor: pointer;
+}
+
 body.firefox .checkbox {
   display: none;
 }
 body.firefox .input-group.btns {
   margin-top: 0.5em;
 }
-
-#shortcut {
-  cursor: pointer;
+body.firefox p {
+  margin-top: 10px;
+}
+body.firefox #shortcut {
+  color: inherit;
+  cursor: text;
+}
+body.firefox #shortcut:hover {
+  text-decoration: none;
 }
