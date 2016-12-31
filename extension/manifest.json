@@ -39,5 +39,6 @@
   "web_accessible_resources": [
     "js/content_script.js"
   ],
+  "minimum_chrome_version": "55",
   "manifest_version": 2
 }
