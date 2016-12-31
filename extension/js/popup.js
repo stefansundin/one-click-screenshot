@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
     lastFocusedWindow: true
   }, function(tabs) {
     var tab = tabs[0];
-    var title = tab.title.replace(/[:*?"<>|\r\n]/g, "").replace(/[\t \/]+/g, " ").trim();
+    var title = (tab.title || tab.url).replace(/[:*?"<>|\r\n]/g, "").replace(/[\t \/]+/g, " ").trim(); // tab.url fallback is needed for Firefox
     $("#filename").value = title + ".png";
     tabId = tab.id;
     chrome.runtime.sendMessage({
