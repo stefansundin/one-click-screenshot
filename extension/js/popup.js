@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   $("#shortcut").addEventListener("click", function() {
-    chrome.runtime.openOptionsPage();
+    chrome.tabs.create({url: "chrome://extensions/configureCommands"});
   });
 
   chrome.commands.getAll(function(commands) {

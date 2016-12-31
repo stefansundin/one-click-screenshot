@@ -5,16 +5,16 @@ var status_timer = null;
 
 function update_status(text) {
   var status = document.getElementById("status");
-  status.textContent = text;
-  status.style.visibility = "visible";
+  status.textContent = `(${text})`;
   clearTimeout(status_timer);
   status_timer = setTimeout(function() {
-    status.style.visibility = "hidden";
-  }, 5000);
+    status.textContent = "";
+  }, 1000);
 };
 
 document.addEventListener("DOMContentLoaded", function() {
   var autostart_input = document.getElementById("autostart");
+  var shortcut_button = document.getElementById("shortcut");
   var reset_button = document.getElementById("reset");
   chrome.storage.sync.get(default_options, function(items) {
     autostart_input.checked = items.autostart;
@@ -25,8 +25,12 @@ document.addEventListener("DOMContentLoaded", function() {
       autostart: autostart_input.checked
     };
     chrome.storage.sync.set(new_options, function() {
-      update_status("Options saved.");
+      update_status("saved");
     });
+  });
+
+  shortcut_button.addEventListener("click", function() {
+    chrome.tabs.update(null, {url: "chrome://extensions/configureCommands"});
   });
 
   reset_button.addEventListener("click", function() {
@@ -39,8 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
   chrome.commands.getAll(function(commands) {
     commands.forEach(function(command) {
       if (command.name == "take-screenshot") {
-        var shortcut = document.getElementById("shortcut");
-        shortcut.innerText = command.shortcut || "not set";
+        shortcut_button.innerText = command.shortcut || "not set";
       }
     });
   });
