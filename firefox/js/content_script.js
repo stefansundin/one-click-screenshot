@@ -2,7 +2,7 @@
   var canvas = document.createElement("canvas");
   var context = canvas.getContext("2d");
   var initial_position = {};
-  var filename = document.title.replace(/[:*?"<>|\r\n]/g, "").replace(/[\t \/]+/g, " ").trim() + ".png";
+  var filename = (document.title || document.location.toString()).replace(/[:*?"<>|\r\n]/g, "").replace(/[\t \/]+/g, " ").trim() + ".png";
   var running = false;
   var aborted = false;
 
@@ -32,12 +32,12 @@
 
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     // console.log(message, sender);
-    if (aborted) return;
     if (message.action == "check") {
       // Check to prevent injecting twice
-      sendResponse(running ? "running" : "injected");
+      sendResponse(!aborted && running ? "running" : "injected");
     }
     else if (message.action == "start") {
+      aborted = false;
       running = true;
       initial_position = {
         x: document.scrollingElement.scrollLeft,
@@ -61,6 +61,7 @@
       sendResponse("starting...");
     }
     else if (message.action == "frame") {
+      if (aborted) return;
       // Draw the new frame on the canvas
       var img = new Image;
       img.onload = function() {
