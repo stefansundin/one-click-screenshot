@@ -32,6 +32,15 @@ document.addEventListener("DOMContentLoaded", function() {
   $("#extension_version").textContent = version;
   if (navigator.userAgent.indexOf("Firefox/") !== -1) {
     document.body.className += " firefox";
+    // The popup does not close automatically in Firefox when links are clicked
+    var links = document.querySelectorAll("a[target='_blank']");
+    for (var i=0; i < links.length; i++) {
+      links[i].addEventListener("click", function() {
+        setTimeout(function() {
+          window.close();
+        }, 100);
+      });
+    }
   }
   else {
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
