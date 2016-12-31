@@ -51,6 +51,11 @@ document.addEventListener("DOMContentLoaded", function() {
       windowId: tab.windowId,
       tabId: tabId
     });
+    var re = tab.url.match(/^chrome(-extension)?:\/\//);
+    if (re) {
+      $("#capture").disabled = true;
+      $("#capture").innerText = `Can't access ${re[0]} urls`;
+    }
   });
 
   if (chrome.storage.sync) {
