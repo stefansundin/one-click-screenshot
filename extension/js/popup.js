@@ -1,5 +1,5 @@
 var version = `v${chrome.runtime.getManifest().version}`;
-var capture_started = false;
+var running = false;
 var tabId = null;
 
 function $() {
@@ -32,8 +32,14 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   else {
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-      if (message.action == "goodbye" && $("#autostart").checked == false) {
-        window.close();
+      if (message.action == "goodbye") {
+        running = false;
+        if ($("#autostart").checked == false) {
+          window.close();
+        }
+        else {
+          $("#capture").innerText = "Done";
+        }
       }
     });
   }
@@ -86,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
     chrome.storage.sync.set({
       autostart: this.checked
     });
-    if (capture_started) {
+    if (running) {
       chrome.runtime.sendMessage({
         action: "abort"
       });
@@ -115,11 +121,14 @@ document.addEventListener("DOMContentLoaded", function() {
           };
           chrome.tabs.sendMessage(tabId, opts, function(response) {
             // console.log("start response:", response);
-            capture_started = true;
+            running = true;
             $("#filename").disabled = true;
             $("#capture").disabled = true;
             $("#capture").innerText = "Working... please hold";
           });
+        }
+        else {
+          $("#capture").innerText = "Error injecting script";
         }
       });
     }, 50);
@@ -142,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
         chrome.tabs.sendMessage(tabId, opts, function(response) {
           // console.log("start response:", response);
-          capture_started = true;
+          running = true;
           $("#filename").disabled = true;
           $("#capture").disabled = true;
           $("#capture").innerText = "Working... please hold";
