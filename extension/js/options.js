@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
   chrome.commands.getAll(function(commands) {
     commands.forEach(function(command) {
       if (command.name == "take-screenshot") {
-        shortcut_button.innerText = command.shortcut || "not set";
+        shortcut_button.textContent = command.shortcut || "not set";
       }
     });
   });

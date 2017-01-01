@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
           window.close();
         }
         else {
-          $("#capture").innerText = "Done";
+          $("#capture").textContent = "Done";
         }
       }
     });
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var re = tab.url.match(/^chrome(-extension)?:\/\//);
     if (re) {
       $("#capture").disabled = true;
-      $("#capture").innerText = `Can't access ${re[0]} urls`;
+      $("#capture").textContent = `Can't access ${re[0]} urls`;
     }
   });
 
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
     commands.forEach(function(command) {
       if (command.name == "take-screenshot") {
         var shortcut = document.getElementById("shortcut");
-        shortcut.innerText = command.shortcut || "not set";
+        shortcut.textContent = command.shortcut || "not set";
       }
     });
   });
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
       chrome.runtime.sendMessage({
         action: "abort"
       });
-      $("#capture").innerText = "Aborted";
+      $("#capture").textContent = "Aborted";
     }
   });
 
@@ -136,11 +136,11 @@ document.addEventListener("DOMContentLoaded", function() {
             running = true;
             $("#filename").disabled = true;
             $("#capture").disabled = true;
-            $("#capture").innerText = "Working... please hold";
+            $("#capture").textContent = "Working... please hold";
           });
         }
         else {
-          $("#capture").innerText = "Error injecting script";
+          $("#capture").textContent = "Error injecting script";
         }
       });
     }, 50);
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
           running = true;
           $("#filename").disabled = true;
           $("#capture").disabled = true;
-          $("#capture").innerText = "Working... please hold";
+          $("#capture").textContent = "Working... please hold";
         });
       }
     });
