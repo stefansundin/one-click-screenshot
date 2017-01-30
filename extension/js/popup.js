@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
       windowId: tab.windowId,
       tabId: tab.id,
     });
-    var re = tab.url.match(/^chrome(-extension)?:\/\//);
+    var re = tab.url.match(/^(?:chrome|moz)(?:-extension)?:\/\/|^about:/);
     if (re) {
       $("#capture").disabled = true;
       $("#capture").textContent = `Can't access ${re[0]} urls`;
