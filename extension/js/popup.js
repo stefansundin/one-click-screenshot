@@ -1,6 +1,6 @@
 var version = `v${chrome.runtime.getManifest().version}`;
 var running = false;
-var tabId = null;
+var tab = null;
 
 function $() {
   var elements = document.querySelectorAll.apply(document, arguments);
@@ -60,14 +60,13 @@ document.addEventListener("DOMContentLoaded", function() {
     active: true,
     lastFocusedWindow: true
   }, function(tabs) {
-    var tab = tabs[0];
+    tab = tabs[0];
     var title = (tab.title || tab.url).replace(/[:*?"<>|\r\n]/g, "").replace(/[\t \/]+/g, " ").trim(); // tab.url fallback is needed for Firefox
     $("#filename").value = title + ".png";
-    tabId = tab.id;
     chrome.runtime.sendMessage({
       action: "options",
       windowId: tab.windowId,
-      tabId: tabId
+      tabId: tab.id,
     });
     var re = tab.url.match(/^chrome(-extension)?:\/\//);
     if (re) {
@@ -131,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
             action: "start",
             filename: $("#filename").value
           };
-          chrome.tabs.sendMessage(tabId, opts, function(response) {
+          chrome.tabs.sendMessage(tab.id, opts, function(response) {
             // console.log("start response:", response);
             running = true;
             $("#filename").disabled = true;
@@ -149,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var opts = {
       action: "check"
     };
-    chrome.tabs.sendMessage(tabId, opts, function(response) {
+    chrome.tabs.sendMessage(tab.id, opts, function(response) {
       if (response == undefined) return;
       console.log("check response", response);
       clearInterval(inject);
@@ -161,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function() {
           action: "start",
           filename: $("#filename").value
         };
-        chrome.tabs.sendMessage(tabId, opts, function(response) {
+        chrome.tabs.sendMessage(tab.id, opts, function(response) {
           // console.log("start response:", response);
           running = true;
           $("#filename").disabled = true;
