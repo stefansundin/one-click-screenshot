@@ -27,6 +27,10 @@ input[pattern]:invalid {
   cursor: pointer;
 }
 
+.injecterror {
+  display: none;
+}
+
 body.firefox .checkbox {
   display: none;
 }

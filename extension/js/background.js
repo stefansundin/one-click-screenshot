@@ -52,7 +52,7 @@ chrome.commands.onCommand.addListener(function(command) {
           file: "js/content_script.js"
         }, function(ret) {
           console.log(ret);
-          if (ret[0] == "injected") {
+          if (ret && ret[0] == "injected") {
             windowId = tab.windowId;
             tabId = tab.id;
             var opts = {
@@ -61,6 +61,9 @@ chrome.commands.onCommand.addListener(function(command) {
             chrome.tabs.sendMessage(tabId, opts, function(response) {
               // console.log("start response:", response);
             });
+          }
+          else {
+            alert("Error starting screenshot.");
           }
         });
       }, 50);

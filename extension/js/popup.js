@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
         file: "js/content_script.js"
       }, function(ret) {
         console.log(ret);
-        if (ret[0] == "injected") {
+        if (ret && ret[0] == "injected") {
           var opts = {
             action: "start",
             filename: $("#filename").value
@@ -140,6 +140,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else {
           $("#capture").textContent = "Error injecting script";
+          if (navigator.userAgent.indexOf("Chrome/") !== -1 && tab.url.match(/^https:\/\/chrome\.google\.com\//)) {
+            $(".injecterror.chrome")[0].style.display = "block";
+          }
+          else if (navigator.userAgent.indexOf("Firefox/") !== -1 && tab.url.match(/\.mozilla\.org\//)) {
+            $(".injecterror.firefox")[0].style.display = "block";
+          }
         }
       });
     }, 50);
