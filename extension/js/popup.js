@@ -141,12 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else {
           $("#capture").textContent = "Error injecting script";
-          if (navigator.userAgent.indexOf("Chrome/") !== -1 && tab.url.match(/^https:\/\/chrome\.google\.com\//)) {
-            $(".injecterror.chrome")[0].style.display = "block";
-          }
-          else if (navigator.userAgent.indexOf("Firefox/") !== -1 && tab.url.match(/\.mozilla\.org\//)) {
-            $(".injecterror.firefox")[0].style.display = "block";
-          }
+          document.body.classList.add("injecterror");
         }
       });
     }, 50);

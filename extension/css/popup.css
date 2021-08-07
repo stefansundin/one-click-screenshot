@@ -2,11 +2,14 @@ body {
   width: 500px;
   padding: 10px;
 }
-body .chrome, body .firefox {
+body .chrome,
+body .firefox,
+body .injecterror {
   display: none;
 }
 body.chrome .chrome,
-body.firefox .firefox {
+body.firefox .firefox,
+body.injecterror .injecterror {
   display: block !important;
 }
 
@@ -29,13 +32,12 @@ input[pattern]:invalid {
 .input-group.btns > .btn {
   margin-right: 1em;
 }
+.btns {
+  margin: 10px 0;
+}
 
 #shortcut {
   cursor: pointer;
-}
-
-.injecterror {
-  display: none;
 }
 
 body.firefox .checkbox {
