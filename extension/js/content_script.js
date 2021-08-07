@@ -57,7 +57,7 @@
         }, function(response) {
           // console.log("capture1 response:", response);
         });
-      }, 150);
+      }, 500);
       sendResponse("starting...");
     }
     else if (message.action == "frame") {
@@ -94,7 +94,7 @@
           }, function(response) {
             // console.log("capture2 response:", response);
           });
-        }, 50);
+        }, 500);
       }
       else {
         // We're done, download the canvas
