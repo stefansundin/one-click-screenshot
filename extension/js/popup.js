@@ -30,8 +30,8 @@ document.addEventListener("keydown", function(e) {
 
 document.addEventListener("DOMContentLoaded", function() {
   $("#extension_version").textContent = version;
-  if (navigator.userAgent.indexOf("Firefox/") !== -1) {
-    document.body.className += " firefox";
+  if (navigator.userAgent.includes("Firefox/")) {
+    document.body.classList.add("firefox");
     // The popup does not close automatically in Firefox when links are clicked
     var links = document.querySelectorAll("a[target='_blank']");
     for (var i=0; i < links.length; i++) {
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
   else {
+    document.body.classList.add("chrome");
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
       if (message.action == "goodbye") {
         running = false;

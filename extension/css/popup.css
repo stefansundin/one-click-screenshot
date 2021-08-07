@@ -2,6 +2,13 @@ body {
   width: 500px;
   padding: 10px;
 }
+body .chrome, body .firefox {
+  display: none;
+}
+body.chrome .chrome,
+body.firefox .firefox {
+  display: block !important;
+}
 
 h2 {
   margin-top: 0;
