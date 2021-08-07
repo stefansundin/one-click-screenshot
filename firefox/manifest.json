@@ -1,7 +1,7 @@
 {
   "name": "One-click Screenshot",
   "version": "0.0.3",
-  "description": "Take screenshots of entire websites. Alt+Shift+W is the shortcut (Option+Shift+W on Mac).",
+  "description": "Take screenshots of entire websites. Alt+Shift+W is the default shortcut (Option+Shift+W on Mac).",
   "homepage_url": "https://github.com/stefansundin/one-click-screenshot",
   "author": "Stefan Sundin",
   "icons": {

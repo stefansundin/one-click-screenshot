@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
             running = true;
             $("#filename").disabled = true;
             $("#capture").disabled = true;
-            $("#capture").textContent = "Working... please hold";
+            $("#capture").textContent = "Working... please wait";
           });
         }
         else {
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
           running = true;
           $("#filename").disabled = true;
           $("#capture").disabled = true;
-          $("#capture").textContent = "Working... please hold";
+          $("#capture").textContent = "Working... please wait";
         });
       }
     });
