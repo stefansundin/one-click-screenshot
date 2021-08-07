@@ -32,7 +32,6 @@
   },
   "permissions": [
     "activeTab",
-    "<all_urls>",
     "storage"
   ],
   "web_accessible_resources": [
