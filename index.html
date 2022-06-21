@@ -21,14 +21,7 @@
 
     <p>This extension is very simple. With just a few clicks, you can take a screenshot of an entire website and save it to a png file. There is no bloat or any fancy post-processing. The extension is open source.</p>
 
-    <p>If you like this extension, please rate it on <a href="https://chrome.google.com/webstore/detail/{{ site.extension_name }}/{{ site.extension_id }}/reviews">the Chrome Web Store</a> or on <a href="https://addons.mozilla.org/firefox/addon/{{ site.extension_name }}/reviews/add">Firefox addons</a>. Thank you!</p>
-
-    <p><strong>Note:</strong> Chrome 59 added <a target="_blank" href="https://developers.google.com/web/updates/2017/04/devtools-release-notes#screenshots">a built-in way to take full-page screenshots</a> with less issues than this extension. You should consider using it on websites that this extension may have issues with (e.g. page headers/footers, floating elements, etc.).</p>
-
-
     <h2 id="news">News <a target="_blank" href="feed.xml"><img src="img/feed.png" alt="RSS feed"></a></h2>
-
-    <p>Note that Firefox has a mandatory review process when updating addons. Therefore the Firefox version will not be out until a few days after I post a news item about it.</p>
 
     {% for post in site.posts %}
     <p><strong>{{ post.date | date: "%Y-%m-%d" }} - {{ post.title }}</strong></p>
